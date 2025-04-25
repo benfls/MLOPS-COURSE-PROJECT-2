@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ml-app
+    template:
+      metadata:
+        matchLabels:
+          app: ml-app
+      spec:
+        containers:
+        - name: ml-app-container
+          image: grc.io/dynamic-music-456811-m8/ml-project:latest
+          ports:
+          - containersPort: 5000 
+---
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: ml-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: ml-app
+  ports:
+  - protocole: TCP
+    port: 80
+    targetPort: 5000
+    
