@@ -1,0 +1,109 @@
+/* Background & Fonts */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: url('https://wallpapercave.com/wp/wp5736937.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Optional dark overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+/* Form Container */
+.form-container {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    max-width: 500px;
+    margin: 5% auto;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* Title */
+.form-container h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #ffc0cb;
+    margin-bottom: 20px;
+}
+
+/* Labels & Inputs */
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+input[type="number"] {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 20px;
+    background: #fff;
+    color: #333;
+}
+
+/* Button */
+button {
+    background: #ff69b4;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #ff85c1;
+}
+
+/* Recommendations */
+.results-container {
+    margin-top: 30px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.results-container h2 {
+    color: #fffacd;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.results-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.results-container li {
+    padding: 8px 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}

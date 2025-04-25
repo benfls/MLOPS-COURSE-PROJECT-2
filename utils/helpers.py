@@ -1,3 +1,4 @@
+from types import NoneType
 import pandas as pd
 import numpy as np
 import joblib
@@ -120,6 +121,7 @@ def find_similar_users(item_input , path_user_weights , path_user2user_encoded ,
                 })
         similar_users = pd.DataFrame(SimilarityArr).sort_values(by="similarity",ascending=False)
         similar_users = similar_users[similar_users.similar_users != item_input]
+        similar_users = similar_users[1:]
         return similar_users
     except Exception as e:
         print("Error Occured",e)
@@ -135,19 +137,21 @@ def get_user_preferences(user_id , path_rating_df , path_anime_df ):
 
     animes_watched_by_user = rating_df[rating_df.user_id == user_id]
 
-    user_rating_percentile = np.percentile(animes_watched_by_user.rating , 75)
+    if animes_watched_by_user.empty == False:
 
-    animes_watched_by_user = animes_watched_by_user[animes_watched_by_user.rating >= user_rating_percentile]
+        user_rating_percentile = np.percentile(animes_watched_by_user.rating , 75)
 
-    top_animes_user = (
-        animes_watched_by_user.sort_values(by="rating" , ascending=False).anime_id.values
-    )
+        animes_watched_by_user = animes_watched_by_user[animes_watched_by_user.rating >= user_rating_percentile]
 
-    anime_df_rows = df[df["anime_id"].isin(top_animes_user)]
-    anime_df_rows = anime_df_rows[["eng_version","Genres"]]
+        top_animes_user = (
+            animes_watched_by_user.sort_values(by="rating" , ascending=False).anime_id.values
+        )
+
+        anime_df_rows = df[df["anime_id"].isin(top_animes_user)]
+        anime_df_rows = anime_df_rows[["eng_version","Genres"]]
 
 
-    return anime_df_rows
+        return anime_df_rows
 
 
 
@@ -162,11 +166,11 @@ def get_user_recommendations(similar_users , user_pref ,path_anime_df , path_syn
 
     for user_id in similar_users.similar_users.values:
         pref_list = get_user_preferences(int(user_id) , path_rating_df, path_anime_df)
+        if type(pref_list) != NoneType :
+            pref_list = pref_list[~pref_list.eng_version.isin(user_pref.eng_version.values)]
 
-        pref_list = pref_list[~pref_list.eng_version.isin(user_pref.eng_version.values)]
-
-        if not pref_list.empty:
-            anime_list.append(pref_list.eng_version.values)
+            if not pref_list.empty:
+                anime_list.append(pref_list.eng_version.values)
 
     if anime_list:
             anime_list = pd.DataFrame(anime_list)
