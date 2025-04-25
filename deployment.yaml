@@ -7,16 +7,16 @@ spec:
   selector:
     matchLabels:
       app: ml-app
-    template:
-      metadata:
-        matchLabels:
-          app: ml-app
-      spec:
-        containers:
-        - name: ml-app-container
-          image: grc.io/dynamic-music-456811-m8/ml-project:latest
-          ports:
-          - containersPort: 5000 
+  template:
+    metadata:
+      labels:
+        app: ml-app
+    spec:
+      containers:
+      - name: ml-app-container
+        image: gcr.io/dynamic-music-456811-m8/ml-project:latest
+        ports:
+        - containerPort: 5000  # Replace with the port your app listens on
 
 ---
 apiVersion: v1
