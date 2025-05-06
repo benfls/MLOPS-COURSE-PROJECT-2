@@ -23,7 +23,6 @@ This project showcases a robust implementation of MLOps principles, integrating 
 
 ### 2. **GitHub**
     - Version control system for collaborative development.
-    - GitHub Actions for additional CI/CD workflows and repository management.
 
 ### 3. **Docker**
     - Containerization of the application for consistent environments across development, testing, and production.
